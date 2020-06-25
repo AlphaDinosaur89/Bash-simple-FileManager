@@ -25,7 +25,7 @@ while true; do
 		clear
 		echo ""
        		echo "commands:"
-        	echo "clear, see, edit, files, goto, delete"
+        	echo "executable, execute, move, clear, see, edit, files, goto, delete"
         	echo ""
         	last="help"
 		;;
@@ -89,11 +89,71 @@ while true; do
 		clear
 		;;
 
-        	*)
+        	
+		move)
+		echo ""
+		echo "Choose file to move without spaces"
+		echo ""
+		
+		clear
+		read mv
+
+		echo ""
+		echo "Choose location to move"
+		echo ""
+		
+		read loc
+		mv $mv $loc
+		;;
+
+        execute)
+		echo ""
+		echo "Choose file to execute"
+		echo ""
+
+		read exc
+        clear        
+            
+		if ./$exc; then
+            break
+		else
+			echo "Error cant find that file, have you marked it as an executable?"
+		fi
+		;;
+
+        executable)
+		echo ""
+		echo "Choose file to make it executable"
+		echo "Options: true/false"
+		echo ""
+
+		read tof
+
+		clear
+
+		if [[ $tof == true ]]; then
+			echo ""
+			echo "Choose file to make/remove it executable"
+			echo ""
+
+			read exec
+			chmod +x $exec
+		elif [[ $tof == false ]]; then
+			clear
+        else
+			echo ""
+			echo "Option not found"
+			echo ""
+        fi
+
+        ;;
+
+        *)
 		echo ""
 		echo "Command not found"
 		echo ""
-		;;
+		;;        
+        
      esac
 
 done
