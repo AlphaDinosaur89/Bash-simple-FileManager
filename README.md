@@ -13,7 +13,13 @@ It just copies the manager to the /usr/bin folder
 tiv:
 
 how to install it:
+
+in the command line type:
+
 $ git clone https://github.com/stefanhaustein/TerminalImageViewer.git
+
 $ cd TerminalImageViewer/src/main/cpp
+
 $ make
+
 $ sudo make install
