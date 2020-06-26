@@ -20,5 +20,3 @@ $ cd TerminalImageViewer/src/main/cpp
 $ make
 
 $ sudo make install
-
-# yo typo at the repo name
