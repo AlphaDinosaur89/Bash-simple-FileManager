@@ -25,6 +25,3 @@ $ cd TerminalImageViewer/src/main/cpp
 $ make
 
 $ sudo make install
-
-
-# yo typo at the conmit name
