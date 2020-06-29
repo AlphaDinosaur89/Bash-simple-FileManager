@@ -1,4 +1,43 @@
 #!/bin/bash
+wmctrl -r :ACTIVE: -N "File manager"
+
+usage="Commands:
+executable Makes a file executable
+execute    Executes an file
+move       Move an directory or file 
+clear      Clears commands output
+see        Prints every line of a file
+edit       Edit an file with vim
+files      Prints files and directories in the current directory
+goto       Navigate through the directories 
+delete     Deletes files and directories
+openimage  Opens an image"
+
+# This is on a if & elif because i forgot case existed so yeah
+while true; do
+    if [[ $1 == -h ]]; then
+        echo "Usage: $usage"
+        exit 0
+    elif [[ $1 == --help ]]; then
+        echo "Usage: $usage"
+        exit 0
+    elif [[ $1 == -help ]]; then
+        echo "Usage: $usage"
+        exit 0
+    elif [[ $1 == -usage ]]; then
+        echo "Usage: $usage"
+        exit 0
+    elif [[ $1 == --usage ]]; then
+        echo "Usage: $usage"
+        exit 0
+    elif [[ $1 == "" ]]; then
+        break
+    elif [[ $1 != -h && $1 != --help && $1 != -help && $1 != -usage && $1 != --usage ]]; then
+        echo "Argument not found"
+        echo "Use --help to help"
+        exit 0
+    fi
+done
 
 ctrc() {
 	clear
@@ -6,7 +45,7 @@ ctrc() {
 }
 
 
-trat ctrc INT
+trap ctrc INT
 
 clear
 while true; do
@@ -26,8 +65,9 @@ while true; do
 		echo ""
        		echo "commands:"
         	echo "executable, execute, move, clear, see, edit, files, goto, delete"
-        	echo ""
-        	last="help"
+        	echo "openimage"
+            echo "For more help use Manager --help on the command line"
+		echo ""
 		;;
 
 		goto)
@@ -37,7 +77,7 @@ while true; do
 		echo ""
 		
 		read goto
-		cd $goto
+		cd "$goto"
 		;;
 
 		delete)
@@ -46,8 +86,8 @@ while true; do
 		echo "Delete wich file?"
 		echo ""
 
-		read del
-		rm -r -f $del
+		read "del"
+		rm -r -f "$del"
 		;;
 
 		files)
@@ -62,6 +102,8 @@ while true; do
 		echo ""
 		echo "exiting"
 		echo ""
+
+		clear
 		exit 0
 		;;
 	
@@ -70,8 +112,8 @@ while true; do
 		echo "See wich file"
 		echo ""
 		
-		read cat
-		cat $cat
+		read "cat"
+		cat "$cat"
         echo ""
 		;;
 
@@ -80,8 +122,8 @@ while true; do
 		echo "Edit wich file?"
 		echo ""
 		
-		read edt
-		nano $edt
+		read "edt"
+		nano "$edt"
         	echo ""
         	;;
 
@@ -92,18 +134,34 @@ while true; do
         	
 		move)
 		echo ""
-		echo "Choose file to move without spaces"
+		echo "Choose file to move"
 		echo ""
 		
+		read "mv"
 		clear
-		read mv
 
 		echo ""
 		echo "Choose location to move"
 		echo ""
 		
-		read loc
-		mv $mv $loc
+		read "loc"
+		mv "$mv" "$loc"
+		;;
+
+		openimage)
+		echo ""
+		echo "Choose image to open"
+		echo ""
+
+		read "opn"
+		clear
+
+		if tiv "$opn"; then
+			echo ""
+		else
+			echo ""
+			echo "Error cant open '$opn' image, no image found"
+		fi
 		;;
 
         execute)
@@ -111,10 +169,10 @@ while true; do
 		echo "Choose file to execute"
 		echo ""
 
-		read exc
+		read "exc"
         clear        
             
-		if ./$exc; then
+		if ./"$exc"; then
             break
 		else
 			echo "Error cant find that file, have you marked it as an executable?"
@@ -127,7 +185,7 @@ while true; do
 		echo "Options: true/false"
 		echo ""
 
-		read tof
+		read "tof"
 
 		clear
 
