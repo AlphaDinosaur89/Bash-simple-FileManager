@@ -1,5 +1,7 @@
 #!/bin/bash
-wmctrl -r :ACTIVE: -N "File manager"
+
+# File Manager
+# Made by AlphaDinosaur89
 
 usage="Commands:
 executable Makes a file executable
@@ -13,31 +15,40 @@ goto       Navigate through the directories
 delete     Deletes files and directories
 openimage  Opens an image"
 
-# This is on a if & elif because i forgot case existed so yeah
 while true; do
-    if [[ $1 == -h ]]; then
-        echo "Usage: $usage"
+    case $1 in
+     -h) 
+        echo "$usage"
         exit 0
-    elif [[ $1 == --help ]]; then
-        echo "Usage: $usage"
+        ;;
+    --help)
+        echo "$usage"
         exit 0
-    elif [[ $1 == -help ]]; then
-        echo "Usage: $usage"
+        ;;
+    -help)
+        echo "$usage"
         exit 0
-    elif [[ $1 == -usage ]]; then
-        echo "Usage: $usage"
+        ;;
+    -usage)
+        echo "$usage"
         exit 0
-    elif [[ $1 == --usage ]]; then
-        echo "Usage: $usage"
+        ;;
+    --usage)
+        echo "$usage"
         exit 0
-    elif [[ $1 == "" ]]; then
+        ;;
+    "")
         break
-    elif [[ $1 != -h && $1 != --help && $1 != -help && $1 != -usage && $1 != --usage ]]; then
-        echo "Argument not found"
+        ;;
+    *)
+        echo "Invalid option"
         echo "Use --help to help"
         exit 0
-    fi
+        ;;    
+    esac
 done
+
+wmctrl -r :ACTIVE: -N "File manager"
 
 ctrc() {
 	clear
@@ -123,7 +134,7 @@ while true; do
 		echo ""
 		
 		read "edt"
-		nano "$edt"
+		vim "$edt"
         	echo ""
         	;;
 
