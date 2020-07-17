@@ -44,6 +44,7 @@ while true; do
     --version)
 	printf "FileManager\nMadeby: AlphaDinosaur89\nVerion:1.5.8-2\n"
 	exit 0
+	;;
     "")
         break
         ;;
