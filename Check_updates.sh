@@ -9,7 +9,7 @@ read out
 if [[ $out == "y" ]]; then
 
 echo -n "Checking for updates. . ."
-if git fetch; then
+if git fetch https://github.com/AlphaDinosaur89/Bash-simple-FileManager; then
         echo -n "Update Found!"
         sudo rm -r -f Bash-simple-FileManager
         echo
@@ -27,7 +27,7 @@ if git fetch; then
 
 else
     echo -n "Checking for updates. . . "
-    if git fetch; then
+    if git fetch https://github.com/AlphaDinosaur89/Bash-simple-FileManager; then
         echo -n "Update Found!"
         echo
         sudo rm -r -f $HOME/Manager
@@ -43,4 +43,3 @@ else
         echo "Success"
     fi
 fi
-
